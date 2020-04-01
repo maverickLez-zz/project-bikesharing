@@ -19,7 +19,7 @@ class NeuralNetwork(object):
         #
         # Note: in Python, you can define a function with a lambda expression,
         # as shown below.
-        self.activation_function = lambda x : 1/1+np.exp(-x)  # Replace 0 with your sigmoid calculation.
+        self.activation_function = lambda x : 1/(1+np.exp(-x))  # Replace 0 with your sigmoid calculation.
         
         ### If the lambda code above is not something you're familiar with,
         # You can uncomment out the following three lines and put your 
@@ -93,14 +93,14 @@ class NeuralNetwork(object):
         output_error_term = error*final_outputs*(1-final_outputs)
         
         # TODO: Calculate the hidden layer's contribution to the error
-        hidden_error = np.dot(output_error_term,self.weights_hidden_to_output)
+        hidden_error = np.dot(self.weights_hidden_to_output,output_error_term)
         
         hidden_error_term = hidden_error*hidden_outputs*(1-hidden_outputs)
         
         # Weight step (input to hidden)
         delta_weights_i_h += hidden_error_term*X[:,None]
         # Weight step (hidden to output)
-        delta_weights_h_o += output_error_term*hidden_outputs
+        delta_weights_h_o += output_error_term*hidden_outputs[:,None]
         return delta_weights_i_h, delta_weights_h_o
 
     def update_weights(self, delta_weights_i_h, delta_weights_h_o, n_records):
