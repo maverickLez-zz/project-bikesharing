@@ -1,2 +1,2 @@
 # Bike Sharing Neural Network 
-### My first neural network and use it to predict daily bike rental ridership
+### My first neural network which predict daily bike rental ridership
